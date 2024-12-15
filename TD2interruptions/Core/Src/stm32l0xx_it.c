@@ -125,11 +125,11 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   /* USER CODE BEGIN SysTick_IRQn 0 */
-  if (cpt == 1000) {
-	  LL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-	  cpt = 0;
-  }
-  cpt++;
+//  if (cpt == 1000) {
+//	  LL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+//	  cpt = 0;
+//  }
+//  cpt++;
 
   /* USER CODE END SysTick_IRQn 0 */
 
@@ -157,7 +157,9 @@ void EXTI4_15_IRQHandler(void)
   {
     LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_13);
     /* USER CODE BEGIN LL_EXTI_LINE_13 */
-
+    static int i;
+    i++;
+    LL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
     /* USER CODE END LL_EXTI_LINE_13 */
   }
   /* USER CODE BEGIN EXTI4_15_IRQn 1 */
