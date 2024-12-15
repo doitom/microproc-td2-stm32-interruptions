@@ -125,7 +125,10 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   /* USER CODE BEGIN SysTick_IRQn 0 */
-  LL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+  if (cpt == 1000) {
+	  LL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	  cpt = 0;
+  }
   cpt++;
 
   /* USER CODE END SysTick_IRQn 0 */
