@@ -46,7 +46,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+extern uint32_t cpt;
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
