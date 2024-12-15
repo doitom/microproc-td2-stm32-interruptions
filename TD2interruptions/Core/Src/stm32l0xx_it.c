@@ -41,7 +41,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-
+uint8_t btn_was_pressed = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -125,10 +125,15 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   /* USER CODE BEGIN SysTick_IRQn 0 */
-//  if (cpt == 1000) {
-//	  cpt = 0;
-//  }
-  cpt++;
+  if (cpt >= 20000) {
+	  cpt = 0;
+	  btn_was_pressed = 0;
+	  LL_GPIO_ResetOutputPin(LD2_GPIO_Port, LD2_Pin);
+  }
+
+  if (btn_was_pressed == 1) {
+	  cpt++;
+  }
 
   /* USER CODE END SysTick_IRQn 0 */
 
@@ -156,10 +161,11 @@ void EXTI4_15_IRQHandler(void)
   {
     LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_13);
     /* USER CODE BEGIN LL_EXTI_LINE_13 */
-    static int i;
-    i++;
-    LL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-    cpt = 0;
+
+	cpt = 0;
+	btn_was_pressed = 1;
+	LL_GPIO_SetOutputPin(LD2_GPIO_Port, LD2_Pin);
+
     /* USER CODE END LL_EXTI_LINE_13 */
   }
   /* USER CODE BEGIN EXTI4_15_IRQn 1 */
